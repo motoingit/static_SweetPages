@@ -358,10 +358,7 @@ export function ProductCard({ product }: { product: Product }) {
           <div className="conversion-lines">
             <span>10.00g → {formatCurrency(product.perKgPrice / 100)}</span>
             <span>
-              ₹1.00 →{" "}
-              {product.perKgPrice
-                ? `${formatNumber(1000 / product.perKgPrice)}g`
-                : "—"}
+              1.00g → {formatCurrency(product.perKgPrice / 1000)}
             </span>
           </div>
         )}
