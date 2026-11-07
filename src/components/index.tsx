@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, type PointerEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import type { CartItem, Product } from '../types';
-import { formatCurrency, formatNumber, priceForWeight, roundToTwo } from '../utils';
+import { createOrderSnapshot, formatCurrency, formatNumber, priceForWeight, roundToTwo } from '../utils';
 import { useCart } from '../context/CartContext';
 
 export function Navbar() {
@@ -80,9 +80,9 @@ export function CartItemCard({ item }: { item: CartItem }) {
 
 export function BillingModal({ onClose }: { onClose: () => void }) {
   const { items } = useCart();
-  const total = items.reduce((sum, item) => roundToTwo(sum + priceForWeight(item.perKgPrice, item.grams)), 0);
   const [note, setNote] = useState('');
-  return <div className="modal-backdrop" role="dialog" aria-modal="true"><div className="billing-modal" id="printable-bill"><div className="modal-head"><div><p className="eyebrow">SweetShop</p><h2>Customer Bill</h2><p className="muted">{new Date().toLocaleString('en-IN')}</p></div><button className="icon-button no-print" onClick={onClose}><X /></button></div><div className="bill-table"><div className="bill-row bill-header"><span>Item</span><span>Qty</span><span>Total</span></div>{items.map(item => <div className="bill-row" key={item.cartItemId}><span><b>{item.name}</b><small>{item.id} · {formatCurrency(item.perKgPrice ?? 0)}/kg</small></span><span>{formatNumber(item.grams)}g</span><strong>{formatCurrency(priceForWeight(item.perKgPrice, item.grams))}</strong></div>)}<div className="bill-total"><span>Grand total</span><strong>{formatCurrency(total)}</strong></div></div><label className="field no-print">Additional Note<textarea value={note} onChange={event => setNote(event.target.value)} placeholder="Customer name, instructions, payment details..." /></label>{note && <div className="printed-note"><b>Additional Note</b><p>{note}</p></div>}<div className="modal-actions no-print"><button className="button ghost" onClick={onClose}>Close</button><button className="button primary" onClick={() => window.print()}>Print Bill</button></div></div></div>;
+  const order = useMemo(() => createOrderSnapshot(items), [items]);
+  return <div className="modal-backdrop" role="dialog" aria-modal="true"><div className="billing-modal" id="printable-bill"><div className="modal-head"><div><p className="eyebrow">SweetShop · Order {order.orderId.slice(0, 8)}</p><h2>Customer Bill</h2><p className="muted">{new Date(order.createdAt).toLocaleString('en-IN')}</p></div><button className="icon-button no-print" onClick={onClose}><X /></button></div><div className="bill-table"><div className="bill-row bill-header"><span>Item</span><span>Qty</span><span>Total</span></div>{order.items.map(item => <div className="bill-row" key={item.orderItemId}><span><b>{item.productName}</b><small>{item.productId} · {formatCurrency(item.baseUnitPrice)}/{item.baseUnit} · {formatCurrency(item.unitGrams ? item.baseUnitPrice * item.unitGrams / 1000 : 0)} per unit</small></span><span>{formatNumber(item.quantityInGrams)}g</span><strong>{formatCurrency(item.totalPrice)}</strong></div>)}<div className="bill-total"><span>Grand total</span><strong>{formatCurrency(order.totalPrice)}</strong></div></div><label className="field no-print">Additional Note<textarea value={note} onChange={event => setNote(event.target.value)} placeholder="Customer name, instructions, payment details..." /></label>{note && <div className="printed-note"><b>Additional Note</b><p>{note}</p></div>}<div className="modal-actions no-print"><button className="button ghost" onClick={onClose}>Close</button><button className="button primary" onClick={() => window.print()}>Print Bill</button></div></div></div>;
 }
 
 export function BackLink({ to, children }: { to: string; children: string }) { return <Link className="back-link" to={to}><ArrowLeft size={16} />{children}</Link>; }
