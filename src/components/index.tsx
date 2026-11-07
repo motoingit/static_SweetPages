@@ -182,6 +182,7 @@ export function ProductCard({ product }: { product: Product }) {
     suppressClick.current = false;
     const target = event.currentTarget;
     const pointerId = event.pointerId;
+    target.setPointerCapture(pointerId);
     longPressTimer.current = setTimeout(() => {
       longPressStarted.current = true;
       radialMoved.current = false;
@@ -189,7 +190,6 @@ export function ProductCard({ product }: { product: Product }) {
       setRadialOpen(true);
       setRadialSelection(null);
       radialSelectionRef.current = null;
-      target.setPointerCapture(pointerId);
       if ("vibrate" in navigator) navigator.vibrate(15);
     }, 300);
   };

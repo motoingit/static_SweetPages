@@ -35,7 +35,7 @@ nav { display: flex; align-items: center; gap: 26px; font-size: .92rem; color: #
 .product-details .card-actions { margin-top: 12px; }
 .product-details .card-actions .button { padding: 8px 6px; font-size: .72rem; }
 .radial-trigger { position: relative; flex: 1; min-width: 0; }
-.radial-trigger > .radial-button { width: 100%; touch-action: manipulation; user-select: none; }
+.radial-trigger > .radial-button { width: 100%; touch-action: none; user-select: none; -webkit-user-select: none; }
 .radial-menu { position: absolute; z-index: 8; left: 50%; bottom: 50%; width: 250px; height: 190px; transform: translate(-50%, 50%); pointer-events: none; animation: radial-menu-in .16s ease-out; }
 .radial-option { position: absolute; display: grid; place-items: center; width: 62px; height: 38px; border: 2px solid #d5a180; border-radius: 12px; background: #fff1e5; color: #704336; font-size: .72rem; font-weight: 800; box-shadow: 0 7px 16px #77301725; transition: transform .15s ease, background .15s ease, color .15s ease; }
 .radial-option.selected { background: #b94a2e; color: #fff; border-color: #b94a2e; transform: scale(1.12); }
