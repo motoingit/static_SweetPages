@@ -11,7 +11,7 @@ function productImageUrl(product: Product) {
 
 export function Navbar() {
   const { totalItems } = useCart();
-  return <header className="topbar"><Link className="brand" to="/"><span className="brand-mark">✦</span> SweetShop</Link><nav><Link to="/sweetlist">Sweet List</Link><Link className="cart-link" to="/cart"><ShoppingBag size={18} /> Cart {totalItems > 0 && <span className="badge">{totalItems}</span>}</Link></nav></header>;
+  return <><div className="deployment-bar">Last deployed: {new Date(__BUILD_TIMESTAMP__).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</div><header className="topbar"><Link className="brand" to="/"><span className="brand-mark">✦</span> SweetShop</Link><nav><Link to="/sweetlist">Sweet List</Link><Link className="cart-link" to="/cart"><ShoppingBag size={18} /> Cart {totalItems > 0 && <span className="badge">{totalItems}</span>}</Link></nav></header></>;
 }
 
 export function QuantityDragSelector({ product, onClose }: { product: Product; onClose: () => void }) {

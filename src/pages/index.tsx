@@ -9,7 +9,7 @@ import { formatCurrency, formatNumber, priceForWeight, roundToTwo } from '../uti
 function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState('');
-  useEffect(() => { fetch(`${import.meta.env.BASE_URL}sweetlist.json`).then(response => { if (!response.ok) throw new Error('Could not load products'); return response.json(); }).then(setProducts).catch(() => setError('Product list could not be loaded. Please refresh the page.')); }, []);
+  useEffect(() => { fetch(`${import.meta.env.BASE_URL}sweetlist.json?v=${encodeURIComponent(__BUILD_TIMESTAMP__)}`, { cache: 'no-store' }).then(response => { if (!response.ok) throw new Error('Could not load products'); return response.json(); }).then(setProducts).catch(() => setError('Product list could not be loaded. Please refresh the page.')); }, []);
   return { products, error };
 }
 
