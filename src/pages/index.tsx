@@ -50,7 +50,7 @@ export function Home() {
 }
 
 export function SweetList() {
-  const { t } = useLanguage();
+  const { t, language, productName } = useLanguage();
   const { products, error } = useProducts();
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("name");
@@ -60,6 +60,7 @@ export function SweetList() {
         .filter(
           (product) =>
             product.name.toLowerCase().includes(query.toLowerCase()) ||
+            productName(product.name).toLowerCase().includes(query.toLowerCase()) ||
             product.id.toLowerCase().includes(query.toLowerCase()),
         )
         .sort((a, b) =>
@@ -69,7 +70,7 @@ export function SweetList() {
               ? (a.perKgPrice ?? 0) - (b.perKgPrice ?? 0)
               : (b.perKgPrice ?? 0) - (a.perKgPrice ?? 0),
         ),
-    [products, query, sort],
+    [products, query, sort, language],
   );
   return (
     <>
@@ -119,7 +120,7 @@ export function SweetList() {
 }
 
 export function SweetDetails() {
-  const { t } = useLanguage();
+  const { t, productName } = useLanguage();
   const { id } = useParams();
   const { products } = useProducts();
   const product = products.find((item) => item.id === id);
@@ -138,6 +139,7 @@ export function SweetDetails() {
       </>
     );
   const price = product.perKgPrice;
+  const displayName = productName(product.name);
   const inputGrams = Number(grams) || 0;
   const inputRupees = Number(rupees) || 0;
   return (
@@ -148,7 +150,7 @@ export function SweetDetails() {
         <div className="detail-layout">
           <section>
             <p className="product-id">{product.id}</p>
-            <h1>{product.name}</h1>
+            <h1>{displayName}</h1>
             <p className="detail-price">
               {price === null
                 ? t("priceNotAdded")

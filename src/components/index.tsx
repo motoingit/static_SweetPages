@@ -96,7 +96,8 @@ export function QuantityDragSelector({
 
 export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
-  const { t } = useLanguage();
+  const { t, productName } = useLanguage();
+  const displayName = productName(product.name);
   const navigate = useNavigate();
   const [quickSelect, setQuickSelect] = useState(false);
   const [customKg, setCustomKg] = useState("0.12");
@@ -119,7 +120,7 @@ export function ProductCard({ product }: { product: Product }) {
     addItem(product, roundToTwo(kg * 1000), kg, "kg");
     if (closeQuickPanel) {
       setQuickSelect(false);
-      showAddMessage(`Added ${formatNumber(kg)}kg ${product.name} to cart.`);
+      showAddMessage(`Added ${formatNumber(kg)}kg ${displayName} to cart.`);
     }
   };
   const addByRupees = () => {
@@ -129,7 +130,7 @@ export function ProductCard({ product }: { product: Product }) {
       addItem(product, grams, amount, "₹");
       setQuickSelect(false);
       showAddMessage(
-        `Added ₹${formatNumber(amount)} of ${product.name} (${formatNumber(grams)}g) to cart.`,
+        `Added ₹${formatNumber(amount)} of ${displayName} (${formatNumber(grams)}g) to cart.`,
       );
     }
   };
@@ -143,7 +144,7 @@ export function ProductCard({ product }: { product: Product }) {
         <img
           className="product-image"
           src={product.imageUrl || `${import.meta.env.BASE_URL}placeholder-image.jpg`}
-          alt={`${product.name} sweets`}
+          alt={`${displayName} sweets`}
           loading="lazy"
           onError={(event) => {
             event.currentTarget.onerror = null;
@@ -151,7 +152,7 @@ export function ProductCard({ product }: { product: Product }) {
           }}
         />
       </div>
-      <h3>{product.name}</h3>
+      <h3>{displayName}</h3>
       <div className="price-row">
         <strong>
           {product.perKgPrice === null
@@ -221,7 +222,7 @@ export function ProductCard({ product }: { product: Product }) {
           onClick={(event) => {
             event.stopPropagation();
             addKg(1);
-            showAddMessage(`Added 1.00kg ${product.name} to cart.`);
+            showAddMessage(`Added 1.00kg ${displayName} to cart.`);
           }}
         >
           Add 1kg
@@ -243,18 +244,19 @@ export function ProductCard({ product }: { product: Product }) {
 
 export function CartItemCard({ item }: { item: CartItem }) {
   const { adjustByUnit, updateGrams, removeItem } = useCart();
-  const { t } = useLanguage();
+  const { t, productName } = useLanguage();
+  const displayName = productName(item.name);
   return (
     <article className="cart-item">
       <div className="cart-item-head">
         <div>
           <span className="product-id">{item.id}</span>
-          <h3>{item.name}</h3>
+          <h3>{displayName}</h3>
         </div>
         <button
           className="icon-button danger"
           onClick={() => removeItem(item.cartItemId)}
-          aria-label={`Remove ${item.name}`}
+          aria-label={`Remove ${displayName}`}
         >
           <Trash2 size={18} />
         </button>
@@ -281,7 +283,7 @@ export function CartItemCard({ item }: { item: CartItem }) {
         <button
           className="icon-button"
           onClick={() => adjustByUnit(item.cartItemId, -1)}
-          aria-label={`Remove ${formatNumber(item.unitGrams)} grams of ${item.name}`}
+          aria-label={`Remove ${formatNumber(item.unitGrams)} grams of ${displayName}`}
         >
           <Minus size={16} />
         </button>
@@ -293,12 +295,12 @@ export function CartItemCard({ item }: { item: CartItem }) {
           onChange={(event) =>
             updateGrams(item.cartItemId, Number(event.target.value))
           }
-          aria-label={`Weight of ${item.name} in grams`}
+          aria-label={`Weight of ${displayName} in grams`}
         />
         <button
           className="icon-button"
           onClick={() => adjustByUnit(item.cartItemId, 1)}
-          aria-label={`Add ${formatNumber(item.unitGrams)} grams of ${item.name}`}
+          aria-label={`Add ${formatNumber(item.unitGrams)} grams of ${displayName}`}
         >
           <Plus size={16} />
         </button>

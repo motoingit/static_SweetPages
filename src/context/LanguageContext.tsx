@@ -2,6 +2,45 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 
 export type Language = "en" | "hi";
 
+const productNamesHindi: Record<string, string> = {
+  "Bundi Laddu": "बूंदी लड्डू",
+  "Besan Laddu": "बेसन लड्डू",
+  Petha: "पेठा",
+  Balusai: "बालूशाही",
+  Batisha: "बताशा",
+  "Gulab Jamun": "गुलाब जामुन",
+  Rasgulla: "रसगुल्ला",
+  "Nariyal Barfi": "नारियल बर्फी",
+  "Nariyal Laddu": "नारियल लड्डू",
+  Barfi: "बर्फी",
+  Milkcake: "मिल्ककेक",
+  "Malai Rasgulla": "मलाई रसगुल्ला",
+  "Malai Gulab Jamun": "मलाई गुलाब जामुन",
+  Doda: "डोडा",
+  "Malai Peda": "मलाई पेड़ा",
+  Peda: "पेड़ा",
+  "Chocolate Mithai": "चॉकलेट मिठाई",
+  BaalDana: "बालदाना",
+  "Urad Dall Ki Pinin": "उड़द दाल की पिन्नी",
+  "Mong Ki Lauj": "मूंग की लौज",
+  "Kaju Katli": "काजू कतली",
+  "Lauki Laddu": "लौकी लड्डू",
+  "Lauki Lauz": "लौकी लौज",
+  Kalakand: "कलाकंद",
+  "Anguri Petha": "अंगूरी पेठा",
+  "Mix Mithai": "मिक्स मिठाई",
+  Arsa: "अरसा",
+  Mathi: "मठी",
+  Namkeen: "नमकीन",
+  "Buskit Baked": "बेक्ड बिस्किट",
+  Dahi: "दही",
+  "Paket Milk": "पैकेट दूध",
+  Panner: "पनीर",
+  "Matar Safal": "मटर सफाल",
+  Bundi: "बूंदी",
+  "Lauki Barfi": "लौकी बर्फी",
+};
+
 const translations = {
   en: {
     sweetList: "Sweet List",
@@ -129,6 +168,7 @@ const LanguageContext = createContext<{
   language: Language;
   setLanguage: (language: Language) => void;
   t: (key: TranslationKey) => string;
+  productName: (name: string) => string;
 } | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -145,6 +185,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         localStorage.setItem("sweetshop-language", next);
       },
       t: (key: TranslationKey) => translations[language][key],
+      productName: (name: string) =>
+        language === "hi" ? productNamesHindi[name] ?? name : name,
     }),
     [language],
   );
