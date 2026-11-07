@@ -8,7 +8,7 @@ body { margin: 0; min-width: 320px; background: radial-gradient(circle at 90% 0%
 button, input, textarea { font: inherit; }
 button { cursor: pointer; }
 a { color: inherit; text-decoration: none; }
-.topbar { height: 76px; max-width: 1180px; margin: auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; }
+.deployment-bar { min-height: 24px; padding: 5px 16px; background: #4a2d24; color: #fffaf3; text-align: center; font-size: .68rem; letter-spacing: .04em; }.topbar { height: 76px; max-width: 1180px; margin: auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; }
 .brand { color: #8d321f; font: 800 1.25rem Georgia, serif; display: flex; align-items: center; gap: 9px; }
 .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; background: #b94a2e; font-size: 15px; }
 nav { display: flex; align-items: center; gap: 26px; font-size: .92rem; color: #785d51; } nav a:hover, .details-link:hover { color: #a63e26; }
