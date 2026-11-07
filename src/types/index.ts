@@ -7,6 +7,9 @@ export type Product = {
 };
 
 export type CartItem = Product & {
+  cartItemId: string;
   grams: number;
   unitGrams: number;
+  selectedQuantity: number;
+  selectedUnit: 'g' | 'kg' | '₹';
 };
