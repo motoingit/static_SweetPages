@@ -152,91 +152,93 @@ export function ProductCard({ product }: { product: Product }) {
           }}
         />
       </div>
-      <h3>{displayName}</h3>
-      <div className="price-row">
-        <strong>
-          {product.perKgPrice === null
-            ? t("priceNotAdded")
-            : formatCurrency(product.perKgPrice)}
-        </strong>
-        {product.perKgPrice !== null && <span>/ kg</span>}
-      </div>
-      {product.perKgPrice !== null && (
-        <div className="conversion-lines">
-          <span>10.00g → {formatCurrency(product.perKgPrice / 100)}</span>
-          <span>
-            ₹1.00 →{" "}
-            {product.perKgPrice
-              ? `${formatNumber(1000 / product.perKgPrice)}g`
-              : "—"}
-          </span>
+      <div className="product-details">
+        <h3>{displayName}</h3>
+        <div className="price-row">
+          <strong>
+            {product.perKgPrice === null
+              ? t("priceNotAdded")
+              : formatCurrency(product.perKgPrice)}
+          </strong>
+          {product.perKgPrice !== null && <span>/ kg</span>}
         </div>
-      )}
-      {addMessage && (
-        <div className="add-message" role="status">
-          {addMessage}
-        </div>
-      )}
-      {quickSelect && (
-        <div
-          className="quick-panel"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <div className="quick-options">
+        {product.perKgPrice !== null && (
+          <div className="conversion-lines">
+            <span>10.00g → {formatCurrency(product.perKgPrice / 100)}</span>
+            <span>
+              ₹1.00 →{" "}
+              {product.perKgPrice
+                ? `${formatNumber(1000 / product.perKgPrice)}g`
+                : "—"}
+            </span>
+          </div>
+        )}
+        {addMessage && (
+          <div className="add-message" role="status">
+            {addMessage}
+          </div>
+        )}
+        {quickSelect && (
+          <div
+            className="quick-panel"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="quick-options">
               <button onClick={() => addKg(1, true)}>Add 1kg</button>
-            <button onClick={() => addKg(0.5, true)}>Add 0.5kg</button>
-            <button onClick={() => addKg(0.25, true)}>Add 0.25kg</button>
+              <button onClick={() => addKg(0.5, true)}>Add 0.5kg</button>
+              <button onClick={() => addKg(0.25, true)}>Add 0.25kg</button>
+            </div>
+            <div className="quick-inputs">
+              <label>
+                {t("byKg")}
+                <input
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  value={customKg}
+                  onChange={(event) => setCustomKg(event.target.value)}
+                />
+                <button onClick={() => addKg(Number(customKg), true)}>{t("add")}</button>
+              </label>
+              <label>
+                {t("byRupee")}
+                <input
+                  type="number"
+                  min="1"
+                  step="0.01"
+                  value={rupees}
+                  onChange={(event) => setRupees(event.target.value)}
+                />
+                <button disabled={!product.perKgPrice} onClick={addByRupees}>
+                  {t("add")}
+                </button>
+              </label>
+            </div>
           </div>
-          <div className="quick-inputs">
-            <label>
-              {t("byKg")}
-              <input
-                type="number"
-                min="0.01"
-                step="0.01"
-                value={customKg}
-                onChange={(event) => setCustomKg(event.target.value)}
-              />
-              <button onClick={() => addKg(Number(customKg), true)}>{t("add")}</button>
-            </label>
-            <label>
-              {t("byRupee")}
-              <input
-                type="number"
-                min="1"
-                step="0.01"
-                value={rupees}
-                onChange={(event) => setRupees(event.target.value)}
-              />
-              <button disabled={!product.perKgPrice} onClick={addByRupees}>
-                {t("add")}
-              </button>
-            </label>
-          </div>
+        )}
+        <div className="card-actions">
+          <button
+            className="button primary"
+            disabled={product.perKgPrice === null}
+            onClick={(event) => {
+              event.stopPropagation();
+              addKg(1);
+              showAddMessage(`Added 1.00kg ${displayName} to cart.`);
+            }}
+          >
+            Add 1kg
+          </button>
+          <button
+            className="button ghost"
+            onClick={(event) => {
+              event.stopPropagation();
+              setQuickSelect((value) => !value);
+            }}
+            disabled={product.perKgPrice === null}
+          >
+            {quickSelect ? t("close") : t("quickAdd")}
+          </button>
         </div>
-      )}
-      <div className="card-actions">
-        <button
-          className="button primary"
-          disabled={product.perKgPrice === null}
-          onClick={(event) => {
-            event.stopPropagation();
-            addKg(1);
-            showAddMessage(`Added 1.00kg ${displayName} to cart.`);
-          }}
-        >
-          Add 1kg
-        </button>
-        <button
-          className="button ghost"
-          onClick={(event) => {
-            event.stopPropagation();
-            setQuickSelect((value) => !value);
-          }}
-          disabled={product.perKgPrice === null}
-        >
-          {quickSelect ? t("close") : t("quickAdd")}
-        </button>
       </div>
     </article>
   );
@@ -248,6 +250,16 @@ export function CartItemCard({ item }: { item: CartItem }) {
   const displayName = productName(item.name);
   return (
     <article className="cart-item">
+      <img
+        className="cart-item-image"
+        src={item.imageUrl || `${import.meta.env.BASE_URL}placeholder-image.jpg`}
+        alt={`${displayName} sweets`}
+        loading="lazy"
+        onError={(event) => {
+          event.currentTarget.onerror = null;
+          event.currentTarget.src = `${import.meta.env.BASE_URL}placeholder-image.jpg`;
+        }}
+      />
       <div className="cart-item-head">
         <div>
           <span className="product-id">{item.id}</span>
