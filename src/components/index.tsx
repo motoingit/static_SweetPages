@@ -7,7 +7,7 @@ import { useCart } from '../context/CartContext';
 
 export function Navbar() {
   const { totalItems } = useCart();
-  return <><div className="deployment-bar">Last deployed: 07 Nov 2026, 10:40 AM IST</div><header className="topbar"><Link className="brand" to="/"><span className="brand-mark">✦</span> SweetShop</Link><nav><Link to="/sweetlist">Sweet List</Link><Link className="cart-link" to="/cart"><ShoppingBag size={18} /> Cart {totalItems > 0 && <span className="badge">{totalItems}</span>}</Link></nav></header></>;
+  return <header className="topbar"><Link className="brand" to="/"><span className="brand-mark">✦</span> SweetShop</Link><nav><Link to="/sweetlist">Sweet List</Link><Link className="cart-link" to="/cart"><ShoppingBag size={18} /> Cart {totalItems > 0 && <span className="badge">{totalItems}</span>}</Link></nav></header>;
 }
 
 export function QuantityDragSelector({ product, onClose }: { product: Product; onClose: () => void }) {
