@@ -1,4 +1,4 @@
-import { useRef, useState, type PointerEvent } from 'react';
+import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import type { CartItem, Product } from '../types';
@@ -32,20 +32,44 @@ export function ProductCard({ product }: { product: Product }) {
   const [quickSelect, setQuickSelect] = useState(false);
   const [customKg, setCustomKg] = useState('0.12');
   const [rupees, setRupees] = useState('10');
-  const addKg = (kg: number) => addItem(product, roundToTwo(kg * 1000), kg, 'kg');
+  const [addMessage, setAddMessage] = useState('');
+  const messageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (messageTimer.current) clearTimeout(messageTimer.current);
+  }, []);
+  const showAddMessage = (message: string) => {
+    setAddMessage(message);
+    if (messageTimer.current) clearTimeout(messageTimer.current);
+    messageTimer.current = setTimeout(() => setAddMessage(''), 3500);
+  };
+  const addKg = (kg: number, closeQuickPanel = false) => {
+    if (!Number.isFinite(kg) || kg <= 0) return;
+    addItem(product, roundToTwo(kg * 1000), kg, 'kg');
+    if (closeQuickPanel) {
+      setQuickSelect(false);
+      showAddMessage(`Added ${formatNumber(kg)}kg ${product.name} to cart.`);
+    }
+  };
   const addByRupees = () => {
-    if (product.perKgPrice && Number(rupees) > 0) addItem(product, roundToTwo((Number(rupees) * 1000) / product.perKgPrice), Number(rupees), '₹');
+    const amount = Number(rupees);
+    if (product.perKgPrice && amount > 0) {
+      const grams = roundToTwo((amount * 1000) / product.perKgPrice);
+      addItem(product, grams, amount, '₹');
+      setQuickSelect(false);
+      showAddMessage(`Added ₹${formatNumber(amount)} of ${product.name} (${formatNumber(grams)}g) to cart.`);
+    }
   };
   return <article className="product-card" onClick={() => navigate(`/sweetlist/${product.id}`)}>
     <div className="product-top"><span className="product-dot">✦</span></div>
     <h3>{product.name}</h3>
     <div className="price-row"><strong>{product.perKgPrice === null ? 'Price not added' : formatCurrency(product.perKgPrice)}</strong>{product.perKgPrice !== null && <span>/ kg</span>}</div>
     {product.perKgPrice !== null && <div className="conversion-lines"><span>10.00g → {formatCurrency(product.perKgPrice / 100)}</span><span>₹1.00 → {product.perKgPrice ? `${formatNumber(1000 / product.perKgPrice)}g` : '—'}</span></div>}
+    {addMessage && <div className="add-message" role="status">{addMessage}</div>}
     {quickSelect && <div className="quick-panel" onClick={event => event.stopPropagation()}>
-      <div className="quick-options"><button onClick={() => addKg(1)}>Add 1kg</button><button onClick={() => addKg(.5)}>Add 0.5kg</button><button onClick={() => addKg(.25)}>Add 0.25kg</button></div>
-      <div className="quick-inputs"><label>By kg<input type="number" min="0.01" step="0.01" value={customKg} onChange={event => setCustomKg(event.target.value)} /><button onClick={() => addKg(Number(customKg))}>Add</button></label><label>By ₹<input type="number" min="1" value={rupees} onChange={event => setRupees(event.target.value)} /><button disabled={!product.perKgPrice} onClick={addByRupees}>Add</button></label></div>
+      <div className="quick-options"><button onClick={() => addKg(1, true)}>Add 1kg</button><button onClick={() => addKg(.5, true)}>Add 0.5kg</button><button onClick={() => addKg(.25, true)}>Add 0.25kg</button></div>
+      <div className="quick-inputs"><label>By kg<input type="number" min="0.01" step="0.01" value={customKg} onChange={event => setCustomKg(event.target.value)} /><button onClick={() => addKg(Number(customKg), true)}>Add</button></label><label>By ₹<input type="number" min="1" step="0.01" value={rupees} onChange={event => setRupees(event.target.value)} /><button disabled={!product.perKgPrice} onClick={addByRupees}>Add</button></label></div>
     </div>}
-    <div className="card-actions"><button className="button primary" disabled={product.perKgPrice === null} onClick={event => { event.stopPropagation(); addKg(1); }}>Add 1kg</button><button className="button ghost" onClick={event => { event.stopPropagation(); setQuickSelect(value => !value); }} disabled={product.perKgPrice === null}>{quickSelect ? 'Close' : 'Quick add'}</button></div>
+    <div className="card-actions"><button className="button primary" disabled={product.perKgPrice === null} onClick={event => { event.stopPropagation(); addKg(1); showAddMessage(`Added 1.00kg ${product.name} to cart.`); }}>Add 1kg</button><button className="button ghost" onClick={event => { event.stopPropagation(); setQuickSelect(value => !value); }} disabled={product.perKgPrice === null}>{quickSelect ? 'Close' : 'Quick add'}</button></div>
   </article>;
 }
 
