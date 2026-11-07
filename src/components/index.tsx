@@ -109,6 +109,7 @@ export function ProductCard({ product }: { product: Product }) {
   const messageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressStarted = useRef(false);
+  const radialMoved = useRef(false);
   const suppressClick = useRef(false);
   useEffect(
     () => () => {
@@ -182,27 +183,34 @@ export function ProductCard({ product }: { product: Product }) {
     const pointerId = event.pointerId;
     longPressTimer.current = setTimeout(() => {
       longPressStarted.current = true;
+      radialMoved.current = false;
       suppressClick.current = true;
       setRadialOpen(true);
-      setRadialSelection(1);
-      radialSelectionRef.current = 1;
+      setRadialSelection(null);
+      radialSelectionRef.current = null;
       target.setPointerCapture(pointerId);
       if ("vibrate" in navigator) navigator.vibrate(15);
     }, 450);
   };
   const moveRadialGesture = (event: PointerEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    if (longPressStarted.current) updateRadialSelection(event.clientX, event.clientY);
+    if (longPressStarted.current) {
+      radialMoved.current = true;
+      updateRadialSelection(event.clientX, event.clientY);
+    }
   };
   const finishRadialGesture = (event: PointerEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     if (longPressTimer.current) clearTimeout(longPressTimer.current);
     if (longPressStarted.current) {
-      if (radialSelectionRef.current !== null) addRadialQuantity(radialSelectionRef.current);
+      if (radialMoved.current && radialSelectionRef.current !== null) {
+        addRadialQuantity(radialSelectionRef.current);
+      }
       setRadialOpen(false);
       setRadialSelection(null);
       radialSelectionRef.current = null;
       longPressStarted.current = false;
+      radialMoved.current = false;
       return;
     }
     addRadialQuantity(1);
@@ -214,6 +222,7 @@ export function ProductCard({ product }: { product: Product }) {
     setRadialSelection(null);
     radialSelectionRef.current = null;
     longPressStarted.current = false;
+    radialMoved.current = false;
   };
   return (
     <article
