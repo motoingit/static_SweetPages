@@ -5,6 +5,10 @@ import type { CartItem, Product } from '../types';
 import { createOrderSnapshot, formatCurrency, formatNumber, priceForWeight, roundToTwo } from '../utils';
 import { useCart } from '../context/CartContext';
 
+function productImageUrl(product: Product) {
+  return `https://loremflickr.com/640/480/${encodeURIComponent(`${product.name},indian,sweets`)}`;
+}
+
 export function Navbar() {
   const { totalItems } = useCart();
   return <header className="topbar"><Link className="brand" to="/"><span className="brand-mark">✦</span> SweetShop</Link><nav><Link to="/sweetlist">Sweet List</Link><Link className="cart-link" to="/cart"><ShoppingBag size={18} /> Cart {totalItems > 0 && <span className="badge">{totalItems}</span>}</Link></nav></header>;
@@ -60,7 +64,7 @@ export function ProductCard({ product }: { product: Product }) {
     }
   };
   return <article className="product-card" onClick={() => navigate(`/sweetlist/${product.id}`)}>
-    <div className="product-top"><span className="product-dot">✦</span></div>
+    <div className="product-top"><span className="product-dot">✦</span><img className="product-image" src={productImageUrl(product)} alt={`${product.name} sweets`} loading="lazy" onError={event => { event.currentTarget.style.display = 'none'; }} /></div>
     <h3>{product.name}</h3>
     <div className="price-row"><strong>{product.perKgPrice === null ? 'Price not added' : formatCurrency(product.perKgPrice)}</strong>{product.perKgPrice !== null && <span>/ kg</span>}</div>
     {product.perKgPrice !== null && <div className="conversion-lines"><span>10.00g → {formatCurrency(product.perKgPrice / 100)}</span><span>₹1.00 → {product.perKgPrice ? `${formatNumber(1000 / product.perKgPrice)}g` : '—'}</span></div>}
