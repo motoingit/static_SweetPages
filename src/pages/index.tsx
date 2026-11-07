@@ -53,7 +53,7 @@ export function SweetList() {
   const { t, language, productName } = useLanguage();
   const { products, error } = useProducts();
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState("name");
+  const [sort, setSort] = useState("popularity-high");
   const filtered = useMemo(
     () =>
       [...products]
