@@ -1,0 +1,511 @@
+[
+  {
+    "id": "SWT-001",
+    "name": "Bundi Laddu",
+    "perKgPrice": 220,
+    "ingredients": [
+      "Gram flour (besan)",
+      "Sugar",
+      "Ghee",
+      "Cardamom",
+      "Cashews",
+      "Raisins"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://mksweets.com/cdn/shop/files/BoondhiLaddu.webp?v=1764839706&width=1946"
+  },
+  {
+    "id": "SWT-002",
+    "name": "Besan Laddu",
+    "perKgPrice": 240,
+    "ingredients": [
+      "Gram flour (besan)",
+      "Sugar",
+      "Ghee",
+      "Cardamom",
+      "Almonds",
+      "Cashews"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Besan%20ke%20laddoo%20Indian%20festivals%20hero.JPG"
+  },
+  {
+    "id": "SWT-003",
+    "name": "Petha",
+    "perKgPrice": 220,
+    "ingredients": [
+      "Ash gourd (winter melon)",
+      "Sugar",
+      "Water",
+      "Lime water"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://panchhipetha.in/cdn/shop/files/277A5067_1.png?v=1749536077&width=1200"
+  },
+  {
+    "id": "SWT-004",
+    "name": "Balusai",
+    "perKgPrice": 300,
+    "ingredients": [
+      "Refined wheat flour (maida)",
+      "Ghee",
+      "Curd",
+      "Sugar",
+      "Cardamom",
+      "Baking soda"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Balushahi.jpg"
+  },
+  {
+    "id": "SWT-005",
+    "name": "Batisha",
+    "perKgPrice": 240,
+    "ingredients": [
+      "Refined wheat flour (maida)",
+      "Ghee",
+      "Sugar",
+      "Curd",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png"
+  },
+  {
+    "id": "SWT-006",
+    "name": "Gulab Jamun",
+    "perKgPrice": 360,
+    "ingredients": [
+      "Khoya (milk solids)",
+      "Refined wheat flour",
+      "Semolina",
+      "Ghee",
+      "Sugar",
+      "Cardamom",
+      "Rose water"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://prashantcorner.com/cdn/shop/files/DakGulabJamunSR-2.jpg?v=1718083866"
+  },
+  {
+    "id": "SWT-007",
+    "name": "Rasgulla",
+    "perKgPrice": 360,
+    "ingredients": [
+      "Chhena (cottage cheese)",
+      "Sugar",
+      "Water",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://dukaan.b-cdn.net/700x700/webp/projecteagle/images/d46c6b89-07d8-41f9-8259-8c2b5d34fa22.jpg"
+  },
+  {
+    "id": "SWT-008",
+    "name": "Nariyal Barfi",
+    "perKgPrice": 360,
+    "ingredients": [
+      "Coconut",
+      "Sugar",
+      "Milk",
+      "Ghee",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png"
+  },
+  {
+    "id": "SWT-009",
+    "name": "Nariyal Laddu",
+    "perKgPrice": 360,
+    "ingredients": [
+      "Desiccated coconut",
+      "Condensed milk",
+      "Sugar",
+      "Cardamom",
+      "Ghee"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://vegox.co.uk/cdn/shop/products/coconut-ladoo.jpg?v=1664387540&width=1946"
+  },
+  {
+    "id": "SWT-010",
+    "name": "Barfi",
+    "perKgPrice": 480,
+    "ingredients": [
+      "Khoya (milk solids)",
+      "Sugar",
+      "Ghee",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://bhaishankarsweets.com/__l5e/assets-v1/31fe88f2-26b4-49a2-b6ba-1cb98985e471/cat-mlk.jpg"
+  },
+  {
+    "id": "SWT-011",
+    "name": "Milkcake",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Milk",
+      "Sugar",
+      "Ghee",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://swagathfoods.com.au/cdn/shop/files/milk-cake-and-kalakand_swagath_foods.jpg?v=1726639405"
+  },
+  {
+    "id": "SWT-012",
+    "name": "Malai Rasgulla",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Chhena (cottage cheese)",
+      "Milk",
+      "Cream (malai)",
+      "Sugar",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://dukaan.b-cdn.net/700x700/webp/projecteagle/images/d46c6b89-07d8-41f9-8259-8c2b5d34fa22.jpg"
+  },
+  {
+    "id": "SWT-013",
+    "name": "Malai Gulab Jamun",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Khoya (milk solids)",
+      "Milk",
+      "Refined wheat flour",
+      "Sugar",
+      "Ghee",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://prashantcorner.com/cdn/shop/files/DakGulabJamunSR-2.jpg?v=1718083866"
+  },
+  {
+    "id": "SWT-014",
+    "name": "Doda",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Khoya (milk solids)",
+      "Sugar",
+      "Ghee",
+      "Wheat flour",
+      "Almonds",
+      "Pistachios",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.mithaasusa.com/storage/2024/09/Dhodha-Burfi.webp"
+  },
+  {
+    "id": "SWT-015",
+    "name": "Malai Peda",
+    "perKgPrice": 500,
+    "ingredients": [
+      "Khoya (milk solids)",
+      "Milk cream (malai)",
+      "Sugar",
+      "Ghee",
+      "Cardamom",
+      "Pistachios"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://bhaishankarsweets.com/__l5e/assets-v1/31fe88f2-26b4-49a2-b6ba-1cb98985e471/cat-mlk.jpg"
+  },
+  {
+    "id": "SWT-016",
+    "name": "Peda",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Khoya (milk solids)",
+      "Sugar",
+      "Cardamom",
+      "Ghee",
+      "Pistachios"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png"
+  },
+  {
+    "id": "SWT-017",
+    "name": "Chocolate Mithai",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Khoya (milk solids)",
+      "Sugar",
+      "Cocoa powder",
+      "Ghee",
+      "Milk"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://floristchennai.com/cdn/shop/products/CHOCOLATE-BARFI-AGARWAL_large.jpg?v=1681805750"
+  },
+  {
+    "id": "SWT-018",
+    "name": "BaalDana",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Khoya (milk solids)",
+      "Sugar",
+      "Ghee",
+      "Sugar balls"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.ramantehomes.com/wp-content/uploads/2025/05/Untitled-design-6-1024x683.png"
+  },
+  {
+    "id": "SWT-019",
+    "name": "Urad Dall Ki Pinin",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Urad dal",
+      "Ghee",
+      "Sugar",
+      "Semolina",
+      "Khoya",
+      "Cardamom",
+      "Almonds",
+      "Cashews"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.ruchiskitchen.com/wp-content/uploads/2017/01/Urad-dal-pinni-ki-Pinnie-7-500x500.jpg"
+  },
+  {
+    "id": "SWT-020",
+    "name": "Mong Ki Lauj",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Moong dal",
+      "Ghee",
+      "Sugar",
+      "Milk",
+      "Cardamom",
+      "Almonds",
+      "Pistachios"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://dy3rma73kowlp.cloudfront.net/uploads/2025/09/moong-daal-ki-barfi-recipe.jpg"
+  },
+  {
+    "id": "SWT-021",
+    "name": "Kaju Katli",
+    "perKgPrice": 900,
+    "ingredients": [
+      "Cashews",
+      "Sugar",
+      "Water",
+      "Cardamom",
+      "Ghee"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://desikartt.com/cdn/shop/files/23_1445x.png?v=1740550945"
+  },
+  {
+    "id": "SWT-022",
+    "name": "Lauki Laddu",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Bottle gourd (lauki)",
+      "Milk",
+      "Sugar",
+      "Ghee",
+      "Cardamom",
+      "Almonds"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg"
+  },
+  {
+    "id": "SWT-023",
+    "name": "Lauki Lauz",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Bottle gourd (lauki)",
+      "Milk",
+      "Sugar",
+      "Ghee",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg"
+  },
+  {
+    "id": "SWT-024",
+    "name": "Kalakand",
+    "perKgPrice": 600,
+    "ingredients": [
+      "Milk",
+      "Sugar",
+      "Lemon juice or food-grade acid",
+      "Cardamom",
+      "Pistachios"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://swagathfoods.com.au/cdn/shop/files/milk-cake-and-kalakand_swagath_foods.jpg?v=1726639405"
+  },
+  {
+    "id": "SWT-025",
+    "name": "Anguri Petha",
+    "perKgPrice": 280,
+    "ingredients": [
+      "Ash gourd (winter melon)",
+      "Sugar",
+      "Water",
+      "Cardamom",
+      "Food colour (optional)"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://panchhipetha.in/cdn/shop/files/Panchhi_Petha_Products_21.png?v=1746769456&width=1000"
+  },
+  {
+    "id": "SWT-026",
+    "name": "Mix Mithai",
+    "perKgPrice": 360,
+    "ingredients": [
+      "Assorted milk sweets",
+      "Khoya",
+      "Sugar",
+      "Ghee",
+      "Coconut",
+      "Nuts",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png"
+  },
+  {
+    "id": "SWT-027",
+    "name": "Arsa",
+    "perKgPrice": 280,
+    "ingredients": [
+      "Rice flour",
+      "Jaggery",
+      "Sesame seeds",
+      "Ghee or oil",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://static.thehosteller.com/blogimage/image-1743452130137.jpeg"
+  },
+  {
+    "id": "SWT-028",
+    "name": "Mathi",
+    "perKgPrice": 240,
+    "ingredients": [
+      "Wheat flour",
+      "Ghee or oil",
+      "Salt",
+      "Carom seeds (ajwain)",
+      "Black pepper"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.desirashan.com/cdn/shop/files/9bc5bcb0-9207-4a9b-a5c6-c45fc8ff5eb3.png?v=1776958065&width=1500"
+  },
+  {
+    "id": "SWT-029",
+    "name": "Namkeen",
+    "perKgPrice": 280,
+    "ingredients": [
+      "Gram flour",
+      "Flattened rice",
+      "Peanuts",
+      "Edible oil",
+      "Salt",
+      "Chilli powder",
+      "Spices"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://tiimg.tistatic.com/fp/3/008/019/nutritional-facts-fried-lentils-and-peanuts-spicy-mixture-namkeen-882.jpg"
+  },
+  {
+    "id": "SWT-030",
+    "name": "Buskit Baked",
+    "perKgPrice": 30,
+    "ingredients": [
+      "Wheat flour or refined flour",
+      "Sugar",
+      "Butter or vegetable fat",
+      "Milk",
+      "Baking powder",
+      "Flavouring"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://images.deliveryhero.io/image/fd-pk/LH/pn10-listing.jpg"
+  },
+  {
+    "id": "SWT-031",
+    "name": "Dahi",
+    "perKgPrice": 100,
+    "ingredients": [
+      "Milk",
+      "Live yogurt cultures"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0919/4812/2417/files/dairy_milk_curd_paneer.png?v=1782715676"
+  },
+  {
+    "id": "SWT-032",
+    "name": "Paket Milk",
+    "perKgPrice": 36,
+    "ingredients": [
+      "Milk"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0919/4812/2417/files/dairy_milk_curd_paneer.png?v=1782715676"
+  },
+  {
+    "id": "SWT-033",
+    "name": "Panner",
+    "perKgPrice": 400,
+    "ingredients": [
+      "Milk",
+      "Food-grade coagulant (lemon juice or citric acid)",
+      "Water"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://cdn.cdnparenting.com/articles/2018/04/516479764-H.jpg"
+  },
+  {
+    "id": "SWT-034",
+    "name": "Matar Safal",
+    "perKgPrice": 160,
+    "ingredients": [
+      "Green peas",
+      "Seasoning",
+      "Salt"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://tiimg.tistatic.com/fp/3/008/019/nutritional-facts-fried-lentils-and-peanuts-spicy-mixture-namkeen-882.jpg"
+  },
+  {
+    "id": "SWT-035",
+    "name": "Bundi",
+    "perKgPrice": 220,
+    "ingredients": [
+      "Gram flour (besan)",
+      "Water",
+      "Sugar",
+      "Ghee or oil",
+      "Cardamom"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://mksweets.com/cdn/shop/files/BoondhiLaddu.webp?v=1764839706&width=1946"
+  },
+  {
+    "id": "SWT-036",
+    "name": "Lauki Barfi",
+    "perKgPrice": 460,
+    "ingredients": [
+      "Bottle gourd (lauki)",
+      "Milk",
+      "Sugar",
+      "Ghee",
+      "Cardamom",
+      "Almonds"
+    ],
+    "category": "Sweets",
+    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg"
+  }
+]
