@@ -250,7 +250,7 @@ export function ProductCard({ product }: { product: Product }) {
     const dx = clientX - (bounds.left + bounds.width / 2);
     const dy = clientY - (bounds.top + bounds.height / 2);
     const distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance < 48) {
+    if (distance < 72) {
       setRadialSelection(1);
       radialSelectionRef.current = 1;
       return;
@@ -326,7 +326,10 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article
       className="product-card"
-      onClick={() => navigate(`/sweetlist/${product.id}`)}
+      onClick={(event) => {
+        if ((event.target as Element).closest("button, input, textarea, select")) return;
+        navigate(`/sweetlist/${product.id}`);
+      }}
     >
       <div className="product-top">
         <span className="product-dot">✦</span>
@@ -438,7 +441,6 @@ export function ProductCard({ product }: { product: Product }) {
               onPointerLeave={moveRadialGesture}
               onClick={(event) => {
                 event.stopPropagation();
-                if (event.detail === 0 && !suppressClick.current) addRadialQuantity(1);
                 suppressClick.current = false;
               }}
             >
