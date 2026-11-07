@@ -95,7 +95,7 @@ export function QuantityDragSelector({
 }
 
 export function ProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart();
+  const { addItem, updateItemUnits } = useCart();
   const { t, productName } = useLanguage();
   const displayName = productName(product.name);
   const navigate = useNavigate();
@@ -105,15 +105,28 @@ export function ProductCard({ product }: { product: Product }) {
   const [addMessage, setAddMessage] = useState("");
   const [radialOpen, setRadialOpen] = useState(false);
   const [radialSelection, setRadialSelection] = useState<number | null>(null);
+  const [lastAddedCartItemId, setLastAddedCartItemId] = useState<string | null>(null);
+  const [unitCount, setUnitCount] = useState(1);
+  const [unitControlVisible, setUnitControlVisible] = useState(false);
+  const [unitRadialOpen, setUnitRadialOpen] = useState(false);
+  const [unitRadialSelection, setUnitRadialSelection] = useState<number | null>(null);
   const radialSelectionRef = useRef<number | null>(null);
+  const unitRadialSelectionRef = useRef<number | null>(null);
   const messageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressStarted = useRef(false);
   const radialMoved = useRef(false);
   const suppressClick = useRef(false);
+  const unitLongPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const unitLongPressStarted = useRef(false);
+  const unitRadialMoved = useRef(false);
+  const unitSuppressClick = useRef(false);
+  const unitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(
     () => () => {
       if (messageTimer.current) clearTimeout(messageTimer.current);
+      if (unitTimer.current) clearTimeout(unitTimer.current);
+      if (unitLongPressTimer.current) clearTimeout(unitLongPressTimer.current);
     },
     [],
   );
@@ -124,7 +137,12 @@ export function ProductCard({ product }: { product: Product }) {
   };
   const addKg = (kg: number, closeQuickPanel = false) => {
     if (!Number.isFinite(kg) || kg <= 0) return;
-    addItem(product, roundToTwo(kg * 1000), kg, "kg");
+    const cartItemId = addItem(product, roundToTwo(kg * 1000), kg, "kg");
+    setLastAddedCartItemId(cartItemId);
+    setUnitCount(1);
+    setUnitControlVisible(true);
+    if (unitTimer.current) clearTimeout(unitTimer.current);
+    unitTimer.current = setTimeout(() => setUnitControlVisible(false), 3000);
     if (closeQuickPanel) {
       setQuickSelect(false);
       showAddMessage(`Added ${formatNumber(kg)}kg ${displayName} to cart.`);
@@ -144,6 +162,86 @@ export function ProductCard({ product }: { product: Product }) {
   const addRadialQuantity = (kg: number) => {
     addKg(kg);
     showAddMessage(`Added ${formatNumber(kg)}kg ${displayName} to cart.`);
+  };
+  const applyUnitCount = (units: number) => {
+    if (!lastAddedCartItemId) return;
+    const safeUnits = Math.min(30, Math.max(1, Math.round(units)));
+    updateItemUnits(lastAddedCartItemId, safeUnits);
+    setUnitCount(safeUnits);
+  };
+  const updateUnitRadialSelection = (clientX: number, clientY: number) => {
+    const button = document.querySelector(`[data-unit-button="${product.id}"]`);
+    if (!(button instanceof HTMLElement)) return;
+    const bounds = button.getBoundingClientRect();
+    const dx = clientX - (bounds.left + bounds.width / 2);
+    const dy = clientY - (bounds.top + bounds.height / 2);
+    if (Math.hypot(dx, dy) < 30) {
+      setUnitRadialSelection(unitCount);
+      unitRadialSelectionRef.current = unitCount;
+      return;
+    }
+    const options = [
+      { units: 5, angle: Math.PI },
+      { units: 10, angle: 0 },
+      { units: 20, angle: -Math.PI * 0.75 },
+      { units: 30, angle: -Math.PI * 0.25 },
+    ];
+    const nearest = options.reduce<{ units: number; distance: number }>((best, option) => {
+      const distance = Math.hypot(dx - Math.cos(option.angle) * 80, dy - Math.sin(option.angle) * 80);
+      return distance < best.distance ? { units: option.units, distance } : best;
+    }, { units: 1, distance: Infinity });
+    const selection = nearest.distance <= 58 ? nearest.units : null;
+    setUnitRadialSelection(selection);
+    unitRadialSelectionRef.current = selection;
+  };
+  const startUnitGesture = (event: PointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    const target = event.currentTarget;
+    const pointerId = event.pointerId;
+    target.setPointerCapture(pointerId);
+    unitLongPressStarted.current = false;
+    unitRadialMoved.current = false;
+    unitSuppressClick.current = false;
+    unitLongPressTimer.current = setTimeout(() => {
+      unitLongPressStarted.current = true;
+      unitSuppressClick.current = true;
+      setUnitRadialOpen(true);
+      setUnitRadialSelection(null);
+      unitRadialSelectionRef.current = null;
+      if ("vibrate" in navigator) navigator.vibrate(15);
+    }, 300);
+  };
+  const moveUnitGesture = (event: PointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (unitLongPressStarted.current) {
+      unitRadialMoved.current = true;
+      updateUnitRadialSelection(event.clientX, event.clientY);
+    }
+  };
+  const finishUnitGesture = (event: PointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (unitLongPressTimer.current) clearTimeout(unitLongPressTimer.current);
+    if (unitLongPressStarted.current) {
+      if (unitRadialMoved.current && unitRadialSelectionRef.current !== null) {
+        applyUnitCount(unitRadialSelectionRef.current);
+      }
+      setUnitRadialOpen(false);
+      setUnitRadialSelection(null);
+      unitRadialSelectionRef.current = null;
+      unitLongPressStarted.current = false;
+      unitRadialMoved.current = false;
+      return;
+    }
+    applyUnitCount(unitCount >= 30 ? 1 : unitCount + 1);
+  };
+  const cancelUnitGesture = (event: PointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (unitLongPressTimer.current) clearTimeout(unitLongPressTimer.current);
+    setUnitRadialOpen(false);
+    setUnitRadialSelection(null);
+    unitRadialSelectionRef.current = null;
+    unitLongPressStarted.current = false;
+    unitRadialMoved.current = false;
   };
   const updateRadialSelection = (clientX: number, clientY: number) => {
     const button = document.querySelector(`[data-radial-button="${product.id}"]`);
@@ -347,9 +445,43 @@ export function ProductCard({ product }: { product: Product }) {
                 suppressClick.current = false;
               }}
             >
-              Add 1kg
+              psize
             </button>
           </div>
+          {unitControlVisible && (
+            <div className={`unit-trigger ${unitRadialOpen ? "is-open" : ""}`}>
+              {unitRadialOpen && (
+                <div className="unit-radial-menu" role="menu" aria-label="Choose units">
+                  {[20, 30, 5, 10].map((units) => (
+                    <span
+                      key={units}
+                      className={`unit-option unit-${units} ${unitRadialSelection === units ? "selected" : ""}`}
+                    >
+                      ×{units}
+                    </span>
+                  ))}
+                  <span className={`unit-option unit-center ${unitRadialSelection === unitCount ? "selected" : ""}`}>
+                    ×{unitCount}
+                  </span>
+                </div>
+              )}
+              <button
+                data-unit-button={product.id}
+                className="button ghost unit-button"
+                onPointerDown={startUnitGesture}
+                onPointerMove={moveUnitGesture}
+                onPointerUp={finishUnitGesture}
+                onPointerCancel={cancelUnitGesture}
+                onPointerLeave={moveUnitGesture}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  unitSuppressClick.current = false;
+                }}
+              >
+                ×{unitCount}
+              </button>
+            </div>
+          )}
           <button
             className="button ghost"
             onClick={(event) => {
