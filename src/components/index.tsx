@@ -154,24 +154,25 @@ export function ProductCard({ product }: { product: Product }) {
     const distance = Math.sqrt(dx * dx + dy * dy);
     if (distance < 48) {
       setRadialSelection(1);
+      radialSelectionRef.current = 1;
       return;
     }
-    if (distance > 190) {
-      setRadialSelection(null);
-      return;
-    }
-    const angle = Math.atan2(dy, dx);
     const candidates: Array<{ kg: number; angle: number }> = [
       { kg: 0.25, angle: Math.PI },
       { kg: 0.5, angle: 0 },
       { kg: 2, angle: -Math.PI * 0.75 },
       { kg: 5, angle: -Math.PI * 0.25 },
     ];
-    const closest = candidates.reduce<{ kg: number; angle: number; difference: number }>((best, candidate) => {
-      const difference = Math.abs(Math.atan2(Math.sin(angle - candidate.angle), Math.cos(angle - candidate.angle)));
-      return difference < best.difference ? { ...candidate, difference } : best;
-    }, { ...candidates[0], difference: Infinity });
-    const selection = closest.difference <= Math.PI / 3 ? closest.kg : null;
+    const radialDistance = 112;
+    const nearest = candidates.reduce<{ kg: number; distance: number }>((best, candidate) => {
+      const optionX = Math.cos(candidate.angle) * radialDistance;
+      const optionY = Math.sin(candidate.angle) * radialDistance;
+      const optionDistance = Math.hypot(dx - optionX, dy - optionY);
+      return optionDistance < best.distance
+        ? { kg: candidate.kg, distance: optionDistance }
+        : best;
+    }, { kg: 0, distance: Infinity });
+    const selection = nearest.distance <= 72 ? nearest.kg : null;
     setRadialSelection(selection);
     radialSelectionRef.current = selection;
   };
@@ -190,7 +191,7 @@ export function ProductCard({ product }: { product: Product }) {
       radialSelectionRef.current = null;
       target.setPointerCapture(pointerId);
       if ("vibrate" in navigator) navigator.vibrate(15);
-    }, 450);
+    }, 300);
   };
   const moveRadialGesture = (event: PointerEvent<HTMLButtonElement>) => {
     event.stopPropagation();
