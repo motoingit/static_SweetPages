@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowRight, ClipboardList, Search, Sparkles } from 'lucide-react';
-import { BackLink, BillingModal, CartItemCard, Navbar, ProductCard } from '../components';
+import { BackLink, BillingModal, CartItemCard, Navbar, ProductCard } from '../components/index';
 import { useCart } from '../context/CartContext';
 import type { Product } from '../types';
 import { formatCurrency, formatNumber, priceForWeight, roundToTwo } from '../utils';
