@@ -7,6 +7,7 @@ type CartContextValue = {
   totalItems: number;
   addItem: (product: Product, grams?: number) => void;
   updateGrams: (id: string, grams: number) => void;
+  adjustByUnit: (id: string, multiplier: 1 | -1) => void;
   removeItem: (id: string) => void;
   clearCart: () => void;
 };
@@ -16,7 +17,12 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
-      return JSON.parse(localStorage.getItem('sweetshop-cart') ?? '[]') as CartItem[];
+      const savedItems = JSON.parse(localStorage.getItem('sweetshop-cart') ?? '[]') as Array<CartItem & { unitGrams?: number }>;
+      return savedItems.map(item => ({
+        ...item,
+        grams: roundToTwo(item.grams),
+        unitGrams: roundToTwo(item.unitGrams ?? item.grams),
+      }));
     } catch {
       return [];
     }
@@ -32,10 +38,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const existing = current.find(item => item.id === product.id);
       return existing
         ? current.map(item => item.id === product.id ? { ...item, grams: roundToTwo(item.grams + roundedGrams) } : item)
-        : [...current, { ...product, grams: roundedGrams }];
+        : [...current, { ...product, grams: roundedGrams, unitGrams: roundedGrams }];
     }),
     updateGrams: (id, grams) => setItems(current => current.map(item =>
       item.id === id ? { ...item, grams: roundToTwo(Math.max(10, grams || 10)) } : item)),
+    adjustByUnit: (id, multiplier) => setItems(current => current.map(item =>
+      item.id === id
+        ? { ...item, grams: roundToTwo(Math.max(item.unitGrams, item.grams + item.unitGrams * multiplier)) }
+        : item)),
     removeItem: id => setItems(current => current.filter(item => item.id !== id)),
     clearCart: () => setItems([]),
   }), [items]);

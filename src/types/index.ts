@@ -6,4 +6,7 @@ export type Product = {
   category: string;
 };
 
-export type CartItem = Product & { grams: number };
+export type CartItem = Product & {
+  grams: number;
+  unitGrams: number;
+};
