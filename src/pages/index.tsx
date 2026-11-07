@@ -68,7 +68,9 @@ export function SweetList() {
             ? a.name.localeCompare(b.name)
             : sort === "price-low"
               ? (a.perKgPrice ?? 0) - (b.perKgPrice ?? 0)
-              : (b.perKgPrice ?? 0) - (a.perKgPrice ?? 0),
+              : sort === "price-high"
+                ? (b.perKgPrice ?? 0) - (a.perKgPrice ?? 0)
+                : (b.popularityIndex ?? 0) - (a.popularityIndex ?? 0),
         ),
     [products, query, sort, language],
   );
@@ -102,6 +104,7 @@ export function SweetList() {
               <option value="name">{t("nameAz")}</option>
               <option value="price-low">{t("priceLow")}</option>
               <option value="price-high">{t("priceHigh")}</option>
+              <option value="popularity-high">{t("popularityHigh")}</option>
             </select>
           </div>
         </div>
