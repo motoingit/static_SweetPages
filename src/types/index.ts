@@ -5,6 +5,7 @@ export type Product = {
   ingredients: string[];
   category: string;
   imageUrl?: string;
+  popularityIndex?: number;
 };
 
 export type CartItem = Product & {

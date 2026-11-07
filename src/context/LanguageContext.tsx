@@ -100,6 +100,7 @@ const translations = {
     english: "English",
     hindi: "हिन्दी",
     deployed: "Last deployed",
+    popularity: "Popularity",
   },
   hi: {
     sweetList: "मिठाई सूची",
@@ -159,6 +160,7 @@ const translations = {
     english: "English",
     hindi: "हिन्दी",
     deployed: "अंतिम बार तैनात",
+    popularity: "लोकप्रियता",
   },
 } as const;
 

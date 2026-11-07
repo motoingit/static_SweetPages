@@ -154,6 +154,9 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
       <div className="product-details">
         <h3>{displayName}</h3>
+        <div className="popularity-index" aria-label={`${t("popularity")}: ${product.popularityIndex ?? 4} / 5`}>
+          <span>★</span> {product.popularityIndex ?? 4}/5
+        </div>
         <div className="price-row">
           <strong>
             {product.perKgPrice === null

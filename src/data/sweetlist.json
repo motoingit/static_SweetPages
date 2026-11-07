@@ -12,7 +12,8 @@
       "Raisins"
     ],
     "category": "Sweets",
-    "imageUrl": "https://mksweets.com/cdn/shop/files/BoondhiLaddu.webp?v=1764839706&width=1946"
+    "imageUrl": "https://mksweets.com/cdn/shop/files/BoondhiLaddu.webp?v=1764839706&width=1946",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-002",
@@ -27,7 +28,8 @@
       "Cashews"
     ],
     "category": "Sweets",
-    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Besan%20ke%20laddoo%20Indian%20festivals%20hero.JPG"
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Besan%20ke%20laddoo%20Indian%20festivals%20hero.JPG",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-003",
@@ -40,7 +42,8 @@
       "Lime water"
     ],
     "category": "Sweets",
-    "imageUrl": "https://panchhipetha.in/cdn/shop/files/277A5067_1.png?v=1749536077&width=1200"
+    "imageUrl": "https://panchhipetha.in/cdn/shop/files/277A5067_1.png?v=1749536077&width=1200",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-004",
@@ -55,7 +58,8 @@
       "Baking soda"
     ],
     "category": "Sweets",
-    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Balushahi.jpg"
+    "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Balushahi.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-005",
@@ -69,7 +73,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png"
+    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-006",
@@ -85,7 +90,8 @@
       "Rose water"
     ],
     "category": "Sweets",
-    "imageUrl": "https://prashantcorner.com/cdn/shop/files/DakGulabJamunSR-2.jpg?v=1718083866"
+    "imageUrl": "https://prashantcorner.com/cdn/shop/files/DakGulabJamunSR-2.jpg?v=1718083866",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-007",
@@ -98,7 +104,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://dukaan.b-cdn.net/700x700/webp/projecteagle/images/d46c6b89-07d8-41f9-8259-8c2b5d34fa22.jpg"
+    "imageUrl": "https://dukaan.b-cdn.net/700x700/webp/projecteagle/images/d46c6b89-07d8-41f9-8259-8c2b5d34fa22.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-008",
@@ -112,7 +119,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png"
+    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-009",
@@ -126,7 +134,8 @@
       "Ghee"
     ],
     "category": "Sweets",
-    "imageUrl": "https://vegox.co.uk/cdn/shop/products/coconut-ladoo.jpg?v=1664387540&width=1946"
+    "imageUrl": "https://vegox.co.uk/cdn/shop/products/coconut-ladoo.jpg?v=1664387540&width=1946",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-010",
@@ -139,7 +148,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://bhaishankarsweets.com/__l5e/assets-v1/31fe88f2-26b4-49a2-b6ba-1cb98985e471/cat-mlk.jpg"
+    "imageUrl": "https://bhaishankarsweets.com/__l5e/assets-v1/31fe88f2-26b4-49a2-b6ba-1cb98985e471/cat-mlk.jpg",
+    "popularityIndex": 5
   },
   {
     "id": "SWT-011",
@@ -152,7 +162,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://swagathfoods.com.au/cdn/shop/files/milk-cake-and-kalakand_swagath_foods.jpg?v=1726639405"
+    "imageUrl": "https://swagathfoods.com.au/cdn/shop/files/milk-cake-and-kalakand_swagath_foods.jpg?v=1726639405",
+    "popularityIndex": 5
   },
   {
     "id": "SWT-012",
@@ -166,7 +177,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://dukaan.b-cdn.net/700x700/webp/projecteagle/images/d46c6b89-07d8-41f9-8259-8c2b5d34fa22.jpg"
+    "imageUrl": "https://dukaan.b-cdn.net/700x700/webp/projecteagle/images/d46c6b89-07d8-41f9-8259-8c2b5d34fa22.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-013",
@@ -181,7 +193,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://prashantcorner.com/cdn/shop/files/DakGulabJamunSR-2.jpg?v=1718083866"
+    "imageUrl": "https://prashantcorner.com/cdn/shop/files/DakGulabJamunSR-2.jpg?v=1718083866",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-014",
@@ -197,7 +210,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.mithaasusa.com/storage/2024/09/Dhodha-Burfi.webp"
+    "imageUrl": "https://www.mithaasusa.com/storage/2024/09/Dhodha-Burfi.webp",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-015",
@@ -212,7 +226,8 @@
       "Pistachios"
     ],
     "category": "Sweets",
-    "imageUrl": "https://bhaishankarsweets.com/__l5e/assets-v1/31fe88f2-26b4-49a2-b6ba-1cb98985e471/cat-mlk.jpg"
+    "imageUrl": "https://bhaishankarsweets.com/__l5e/assets-v1/31fe88f2-26b4-49a2-b6ba-1cb98985e471/cat-mlk.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-016",
@@ -226,7 +241,8 @@
       "Pistachios"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png"
+    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-017",
@@ -240,7 +256,8 @@
       "Milk"
     ],
     "category": "Sweets",
-    "imageUrl": "https://floristchennai.com/cdn/shop/products/CHOCOLATE-BARFI-AGARWAL_large.jpg?v=1681805750"
+    "imageUrl": "https://floristchennai.com/cdn/shop/products/CHOCOLATE-BARFI-AGARWAL_large.jpg?v=1681805750",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-018",
@@ -253,7 +270,8 @@
       "Sugar balls"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.ramantehomes.com/wp-content/uploads/2025/05/Untitled-design-6-1024x683.png"
+    "imageUrl": "https://www.ramantehomes.com/wp-content/uploads/2025/05/Untitled-design-6-1024x683.png",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-019",
@@ -270,7 +288,8 @@
       "Cashews"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.ruchiskitchen.com/wp-content/uploads/2017/01/Urad-dal-pinni-ki-Pinnie-7-500x500.jpg"
+    "imageUrl": "https://www.ruchiskitchen.com/wp-content/uploads/2017/01/Urad-dal-pinni-ki-Pinnie-7-500x500.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-020",
@@ -286,7 +305,8 @@
       "Pistachios"
     ],
     "category": "Sweets",
-    "imageUrl": "https://dy3rma73kowlp.cloudfront.net/uploads/2025/09/moong-daal-ki-barfi-recipe.jpg"
+    "imageUrl": "https://dy3rma73kowlp.cloudfront.net/uploads/2025/09/moong-daal-ki-barfi-recipe.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-021",
@@ -300,7 +320,8 @@
       "Ghee"
     ],
     "category": "Sweets",
-    "imageUrl": "https://desikartt.com/cdn/shop/files/23_1445x.png?v=1740550945"
+    "imageUrl": "https://desikartt.com/cdn/shop/files/23_1445x.png?v=1740550945",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-022",
@@ -315,7 +336,8 @@
       "Almonds"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg"
+    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-023",
@@ -329,7 +351,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg"
+    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-024",
@@ -343,7 +366,8 @@
       "Pistachios"
     ],
     "category": "Sweets",
-    "imageUrl": "https://swagathfoods.com.au/cdn/shop/files/milk-cake-and-kalakand_swagath_foods.jpg?v=1726639405"
+    "imageUrl": "https://swagathfoods.com.au/cdn/shop/files/milk-cake-and-kalakand_swagath_foods.jpg?v=1726639405",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-025",
@@ -357,7 +381,8 @@
       "Food colour (optional)"
     ],
     "category": "Sweets",
-    "imageUrl": "https://panchhipetha.in/cdn/shop/files/Panchhi_Petha_Products_21.png?v=1746769456&width=1000"
+    "imageUrl": "https://panchhipetha.in/cdn/shop/files/Panchhi_Petha_Products_21.png?v=1746769456&width=1000",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-026",
@@ -373,7 +398,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png"
+    "imageUrl": "https://www.aabsweets.com/order/assets/milk_sweet_category-BXPU0jN5.png",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-027",
@@ -387,7 +413,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://static.thehosteller.com/blogimage/image-1743452130137.jpeg"
+    "imageUrl": "https://static.thehosteller.com/blogimage/image-1743452130137.jpeg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-028",
@@ -401,7 +428,8 @@
       "Black pepper"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.desirashan.com/cdn/shop/files/9bc5bcb0-9207-4a9b-a5c6-c45fc8ff5eb3.png?v=1776958065&width=1500"
+    "imageUrl": "https://www.desirashan.com/cdn/shop/files/9bc5bcb0-9207-4a9b-a5c6-c45fc8ff5eb3.png?v=1776958065&width=1500",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-029",
@@ -417,7 +445,8 @@
       "Spices"
     ],
     "category": "Sweets",
-    "imageUrl": "https://tiimg.tistatic.com/fp/3/008/019/nutritional-facts-fried-lentils-and-peanuts-spicy-mixture-namkeen-882.jpg"
+    "imageUrl": "https://tiimg.tistatic.com/fp/3/008/019/nutritional-facts-fried-lentils-and-peanuts-spicy-mixture-namkeen-882.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-030",
@@ -432,7 +461,8 @@
       "Flavouring"
     ],
     "category": "Sweets",
-    "imageUrl": "https://images.deliveryhero.io/image/fd-pk/LH/pn10-listing.jpg"
+    "imageUrl": "https://images.deliveryhero.io/image/fd-pk/LH/pn10-listing.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-031",
@@ -443,7 +473,8 @@
       "Live yogurt cultures"
     ],
     "category": "Sweets",
-    "imageUrl": "https://cdn.shopify.com/s/files/1/0919/4812/2417/files/dairy_milk_curd_paneer.png?v=1782715676"
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0919/4812/2417/files/dairy_milk_curd_paneer.png?v=1782715676",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-032",
@@ -453,7 +484,8 @@
       "Milk"
     ],
     "category": "Sweets",
-    "imageUrl": "https://cdn.shopify.com/s/files/1/0919/4812/2417/files/dairy_milk_curd_paneer.png?v=1782715676"
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0919/4812/2417/files/dairy_milk_curd_paneer.png?v=1782715676",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-033",
@@ -465,7 +497,8 @@
       "Water"
     ],
     "category": "Sweets",
-    "imageUrl": "https://cdn.cdnparenting.com/articles/2018/04/516479764-H.jpg"
+    "imageUrl": "https://cdn.cdnparenting.com/articles/2018/04/516479764-H.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-034",
@@ -477,7 +510,8 @@
       "Salt"
     ],
     "category": "Sweets",
-    "imageUrl": "https://tiimg.tistatic.com/fp/3/008/019/nutritional-facts-fried-lentils-and-peanuts-spicy-mixture-namkeen-882.jpg"
+    "imageUrl": "https://tiimg.tistatic.com/fp/3/008/019/nutritional-facts-fried-lentils-and-peanuts-spicy-mixture-namkeen-882.jpg",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-035",
@@ -491,7 +525,8 @@
       "Cardamom"
     ],
     "category": "Sweets",
-    "imageUrl": "https://mksweets.com/cdn/shop/files/BoondhiLaddu.webp?v=1764839706&width=1946"
+    "imageUrl": "https://mksweets.com/cdn/shop/files/BoondhiLaddu.webp?v=1764839706&width=1946",
+    "popularityIndex": 4
   },
   {
     "id": "SWT-036",
@@ -506,6 +541,7 @@
       "Almonds"
     ],
     "category": "Sweets",
-    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg"
+    "imageUrl": "https://www.kailashsweets.com/upload/product/dudhi-halwa-20230911173444.jpg",
+    "popularityIndex": 4
   }
 ]
