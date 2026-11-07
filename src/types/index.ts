@@ -4,6 +4,7 @@ export type Product = {
   perKgPrice: number | null;
   ingredients: string[];
   category: string;
+  imageUrl?: string;
 };
 
 export type CartItem = Product & {

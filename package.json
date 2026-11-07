@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "cp index.template.html index.html && tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pro": "serve -s dist"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
@@ -20,6 +21,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
+    "serve": "^14.2.7",
     "tailwindcss": "^3.4.16",
     "typescript": "^5.7.2",
     "vite": "^6.0.3"
