@@ -103,7 +103,13 @@ export function ProductCard({ product }: { product: Product }) {
   const [customKg, setCustomKg] = useState("0.12");
   const [rupees, setRupees] = useState("10");
   const [addMessage, setAddMessage] = useState("");
+  const [radialOpen, setRadialOpen] = useState(false);
+  const [radialSelection, setRadialSelection] = useState<number | null>(null);
+  const radialSelectionRef = useRef<number | null>(null);
   const messageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressStarted = useRef(false);
+  const suppressClick = useRef(false);
   useEffect(
     () => () => {
       if (messageTimer.current) clearTimeout(messageTimer.current);
@@ -133,6 +139,81 @@ export function ProductCard({ product }: { product: Product }) {
         `Added ₹${formatNumber(amount)} of ${displayName} (${formatNumber(grams)}g) to cart.`,
       );
     }
+  };
+  const addRadialQuantity = (kg: number) => {
+    addKg(kg);
+    showAddMessage(`Added ${formatNumber(kg)}kg ${displayName} to cart.`);
+  };
+  const updateRadialSelection = (clientX: number, clientY: number) => {
+    const button = document.querySelector(`[data-radial-button="${product.id}"]`);
+    if (!(button instanceof HTMLElement)) return;
+    const bounds = button.getBoundingClientRect();
+    const dx = clientX - (bounds.left + bounds.width / 2);
+    const dy = clientY - (bounds.top + bounds.height / 2);
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    if (distance < 48) {
+      setRadialSelection(1);
+      return;
+    }
+    if (distance > 190) {
+      setRadialSelection(null);
+      return;
+    }
+    const angle = Math.atan2(dy, dx);
+    const candidates: Array<{ kg: number; angle: number }> = [
+      { kg: 0.25, angle: Math.PI },
+      { kg: 0.5, angle: 0 },
+      { kg: 2, angle: -Math.PI * 0.75 },
+      { kg: 5, angle: -Math.PI * 0.25 },
+    ];
+    const closest = candidates.reduce<{ kg: number; angle: number; difference: number }>((best, candidate) => {
+      const difference = Math.abs(Math.atan2(Math.sin(angle - candidate.angle), Math.cos(angle - candidate.angle)));
+      return difference < best.difference ? { ...candidate, difference } : best;
+    }, { ...candidates[0], difference: Infinity });
+    const selection = closest.difference <= Math.PI / 3 ? closest.kg : null;
+    setRadialSelection(selection);
+    radialSelectionRef.current = selection;
+  };
+  const startRadialGesture = (event: PointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    longPressStarted.current = false;
+    suppressClick.current = false;
+    const target = event.currentTarget;
+    const pointerId = event.pointerId;
+    longPressTimer.current = setTimeout(() => {
+      longPressStarted.current = true;
+      suppressClick.current = true;
+      setRadialOpen(true);
+      setRadialSelection(1);
+      radialSelectionRef.current = 1;
+      target.setPointerCapture(pointerId);
+      if ("vibrate" in navigator) navigator.vibrate(15);
+    }, 450);
+  };
+  const moveRadialGesture = (event: PointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (longPressStarted.current) updateRadialSelection(event.clientX, event.clientY);
+  };
+  const finishRadialGesture = (event: PointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (longPressTimer.current) clearTimeout(longPressTimer.current);
+    if (longPressStarted.current) {
+      if (radialSelectionRef.current !== null) addRadialQuantity(radialSelectionRef.current);
+      setRadialOpen(false);
+      setRadialSelection(null);
+      radialSelectionRef.current = null;
+      longPressStarted.current = false;
+      return;
+    }
+    addRadialQuantity(1);
+  };
+  const cancelRadialGesture = (event: PointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (longPressTimer.current) clearTimeout(longPressTimer.current);
+    setRadialOpen(false);
+    setRadialSelection(null);
+    radialSelectionRef.current = null;
+    longPressStarted.current = false;
   };
   return (
     <article
@@ -220,17 +301,45 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         )}
         <div className="card-actions">
-          <button
-            className="button primary"
-            disabled={product.perKgPrice === null}
-            onClick={(event) => {
-              event.stopPropagation();
-              addKg(1);
-              showAddMessage(`Added 1.00kg ${displayName} to cart.`);
-            }}
-          >
-            Add 1kg
-          </button>
+          <div className={`radial-trigger ${radialOpen ? "is-open" : ""}`}>
+            {radialOpen && (
+              <div className="radial-menu" role="menu" aria-label="Choose quantity">
+                {[
+                  { kg: 2, label: "2 kg", className: "radial-option upper-left" },
+                  { kg: 5, label: "5 kg", className: "radial-option upper-right" },
+                  { kg: 0.25, label: "¼ kg", className: "radial-option left" },
+                  { kg: 0.5, label: "½ kg", className: "radial-option right" },
+                ].map((option) => (
+                  <span
+                    key={option.kg}
+                    className={`${option.className} ${radialSelection === option.kg ? "selected" : ""}`}
+                  >
+                    {option.label}
+                  </span>
+                ))}
+                <span className={`radial-option center ${radialSelection === 1 ? "selected" : ""}`}>
+                  1 kg
+                </span>
+              </div>
+            )}
+            <button
+              data-radial-button={product.id}
+              className="button primary radial-button"
+              disabled={product.perKgPrice === null}
+              onPointerDown={startRadialGesture}
+              onPointerMove={moveRadialGesture}
+              onPointerUp={finishRadialGesture}
+              onPointerCancel={cancelRadialGesture}
+              onPointerLeave={moveRadialGesture}
+              onClick={(event) => {
+                event.stopPropagation();
+                if (event.detail === 0 && !suppressClick.current) addRadialQuantity(1);
+                suppressClick.current = false;
+              }}
+            >
+              Add 1kg
+            </button>
+          </div>
           <button
             className="button ghost"
             onClick={(event) => {
