@@ -10,13 +10,15 @@ import {
   roundToTwo,
 } from "../utils";
 import { useCart } from "../context/CartContext";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Navbar() {
   const { totalItems } = useCart();
+  const { language, setLanguage, t } = useLanguage();
   return (
     <>
       <div className="deployment-bar">
-        Last deployed:{" "}
+        {t("deployed")}:{" "}
         {new Date(__BUILD_TIMESTAMP__).toLocaleString("en-IN", {
           dateStyle: "medium",
           timeStyle: "short",
@@ -27,11 +29,22 @@ export function Navbar() {
           <span className="brand-mark">✦</span> SweetShop
         </Link>
         <nav>
-          <Link to="/sweetlist">Sweet List</Link>
+          <Link to="/sweetlist">{t("sweetList")}</Link>
           <Link className="cart-link" to="/cart">
-            <ShoppingBag size={18} /> Cart{" "}
+            <ShoppingBag size={18} /> {t("cart")}{" "}
             {totalItems > 0 && <span className="badge">{totalItems}</span>}
           </Link>
+          <label className="language-switcher">
+            <span>{t("language")}</span>
+            <select
+              value={language}
+              onChange={(event) => setLanguage(event.target.value as "en" | "hi")}
+              aria-label={t("language")}
+            >
+              <option value="en">{t("english")}</option>
+              <option value="hi">{t("hindi")}</option>
+            </select>
+          </label>
         </nav>
       </header>
     </>
@@ -83,6 +96,7 @@ export function QuantityDragSelector({
 
 export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [quickSelect, setQuickSelect] = useState(false);
   const [customKg, setCustomKg] = useState("0.12");
@@ -141,7 +155,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="price-row">
         <strong>
           {product.perKgPrice === null
-            ? "Price not added"
+            ? t("priceNotAdded")
             : formatCurrency(product.perKgPrice)}
         </strong>
         {product.perKgPrice !== null && <span>/ kg</span>}
@@ -168,13 +182,13 @@ export function ProductCard({ product }: { product: Product }) {
           onClick={(event) => event.stopPropagation()}
         >
           <div className="quick-options">
-            <button onClick={() => addKg(1, true)}>Add 1kg</button>
+              <button onClick={() => addKg(1, true)}>Add 1kg</button>
             <button onClick={() => addKg(0.5, true)}>Add 0.5kg</button>
             <button onClick={() => addKg(0.25, true)}>Add 0.25kg</button>
           </div>
           <div className="quick-inputs">
             <label>
-              By kg
+              {t("byKg")}
               <input
                 type="number"
                 min="0.01"
@@ -182,10 +196,10 @@ export function ProductCard({ product }: { product: Product }) {
                 value={customKg}
                 onChange={(event) => setCustomKg(event.target.value)}
               />
-              <button onClick={() => addKg(Number(customKg), true)}>Add</button>
+              <button onClick={() => addKg(Number(customKg), true)}>{t("add")}</button>
             </label>
             <label>
-              By ₹
+              {t("byRupee")}
               <input
                 type="number"
                 min="1"
@@ -194,7 +208,7 @@ export function ProductCard({ product }: { product: Product }) {
                 onChange={(event) => setRupees(event.target.value)}
               />
               <button disabled={!product.perKgPrice} onClick={addByRupees}>
-                Add
+                {t("add")}
               </button>
             </label>
           </div>
@@ -220,7 +234,7 @@ export function ProductCard({ product }: { product: Product }) {
           }}
           disabled={product.perKgPrice === null}
         >
-          {quickSelect ? "Close" : "Quick add"}
+          {quickSelect ? t("close") : t("quickAdd")}
         </button>
       </div>
     </article>
@@ -229,6 +243,7 @@ export function ProductCard({ product }: { product: Product }) {
 
 export function CartItemCard({ item }: { item: CartItem }) {
   const { adjustByUnit, updateGrams, removeItem } = useCart();
+  const { t } = useLanguage();
   return (
     <article className="cart-item">
       <div className="cart-item-head">
@@ -246,17 +261,17 @@ export function CartItemCard({ item }: { item: CartItem }) {
       </div>
       <div className="cart-grid">
         <span>
-          Rate<strong>{formatCurrency(item.perKgPrice ?? 0)}/kg</strong>
+          {t("rate")}<strong>{formatCurrency(item.perKgPrice ?? 0)}/kg</strong>
         </span>
         <span>
-          Quantity<strong>{formatNumber(item.grams)}g</strong>
+          {t("quantity")}<strong>{formatNumber(item.grams)}g</strong>
           <small>
-            Selected: {formatNumber(item.selectedQuantity)}
-            {item.selectedUnit} · Unit: {formatNumber(item.unitGrams)}g
+            {t("selected")}: {formatNumber(item.selectedQuantity)}
+            {item.selectedUnit} · {t("unit")}: {formatNumber(item.unitGrams)}g
           </small>
         </span>
         <span>
-          Total
+          {t("total")}
           <strong>
             {formatCurrency(priceForWeight(item.perKgPrice, item.grams))}
           </strong>
@@ -299,6 +314,7 @@ export function CartItemCard({ item }: { item: CartItem }) {
 
 export function BillingModal({ onClose }: { onClose: () => void }) {
   const { items } = useCart();
+  const { t } = useLanguage();
   const [note, setNote] = useState("");
   const order = useMemo(() => createOrderSnapshot(items), [items]);
   return (
@@ -309,7 +325,7 @@ export function BillingModal({ onClose }: { onClose: () => void }) {
             <p className="eyebrow">
               SweetShop · Order {order.orderId.slice(0, 8)}
             </p>
-            <h2>Customer Bill</h2>
+            <h2>{t("customerBill")}</h2>
             <p className="muted">
               {new Date(order.createdAt).toLocaleString("en-IN")}
             </p>
@@ -320,9 +336,9 @@ export function BillingModal({ onClose }: { onClose: () => void }) {
         </div>
         <div className="bill-table">
           <div className="bill-row bill-header">
-            <span>Item</span>
-            <span>Qty</span>
-            <span>Total</span>
+            <span>{t("item")}</span>
+            <span>{t("qty")}</span>
+            <span>{t("total")}</span>
           </div>
           {order.items.map((item) => (
             <div className="bill-row" key={item.orderItemId}>
@@ -344,12 +360,12 @@ export function BillingModal({ onClose }: { onClose: () => void }) {
             </div>
           ))}
           <div className="bill-total">
-            <span>Grand total</span>
+            <span>{t("grandTotal")}</span>
             <strong>{formatCurrency(order.totalPrice)}</strong>
           </div>
         </div>
         <label className="field no-print">
-          Additional Note
+          {t("additionalNote")}
           <textarea
             value={note}
             onChange={(event) => setNote(event.target.value)}
@@ -358,16 +374,16 @@ export function BillingModal({ onClose }: { onClose: () => void }) {
         </label>
         {note && (
           <div className="printed-note">
-            <b>Additional Note</b>
+            <b>{t("additionalNote")}</b>
             <p>{note}</p>
           </div>
         )}
         <div className="modal-actions no-print">
           <button className="button ghost" onClick={onClose}>
-            Close
+            {t("closeModal")}
           </button>
           <button className="button primary" onClick={() => window.print()}>
-            Print Bill
+            {t("printBill")}
           </button>
         </div>
       </div>

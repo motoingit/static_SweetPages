@@ -9,6 +9,7 @@ import {
   ProductCard,
 } from "../components/index";
 import { useCart } from "../context/CartContext";
+import { useLanguage } from "../context/LanguageContext";
 import productsData from "../data/sweetlist.json";
 import type { Product } from "../types";
 import {
@@ -23,6 +24,7 @@ function useProducts() {
 }
 
 export function Home() {
+  const { t } = useLanguage();
   return (
     <>
       <Navbar />
@@ -31,18 +33,16 @@ export function Home() {
           <Sparkles size={26} />
           <span>Since 1985 · Made with care</span>
         </div>
-        <p className="eyebrow">Welcome to</p>
+        <p className="eyebrow">{t("welcome")}</p>
         <h1>SweetShop</h1>
         <p className="hero-copy">
-          A simpler way to weigh, price, and bill every sweet your customers
-          love.
+          {t("heroCopy")}
         </p>
         <Link className="button primary large" to="/sweetlist">
-          Explore Sweet List <ArrowRight size={19} />
+          {t("explore")} <ArrowRight size={19} />
         </Link>
         <div className="home-note">
-          <ClipboardList size={18} /> Quick pricing · Easy billing · Always
-          ready
+          <ClipboardList size={18} /> {t("quickPricing")}
         </div>
       </main>
     </>
@@ -50,6 +50,7 @@ export function Home() {
 }
 
 export function SweetList() {
+  const { t } = useLanguage();
   const { products, error } = useProducts();
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("name");
@@ -76,17 +77,17 @@ export function SweetList() {
       <main className="page">
         <div className="page-heading">
           <div>
-            <p className="eyebrow">Fresh selection</p>
-            <h1>Sweet List</h1>
+            <p className="eyebrow">{t("freshSelection")}</p>
+            <h1>{t("sweetList")}</h1>
             <p className="muted">
-              Tap a card for details or add directly to your cart.
+              {t("listHint")}
             </p>
           </div>
           <div className="list-tools">
             <div className="search-box">
               <Search size={18} />
               <input
-                placeholder="Search sweets..."
+                placeholder={t("search")}
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
@@ -95,11 +96,11 @@ export function SweetList() {
               className="sort-select"
               value={sort}
               onChange={(event) => setSort(event.target.value)}
-              aria-label="Sort sweet list"
+              aria-label={t("sortLabel")}
             >
-              <option value="name">Name A–Z</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
+              <option value="name">{t("nameAz")}</option>
+              <option value="price-low">{t("priceLow")}</option>
+              <option value="price-high">{t("priceHigh")}</option>
             </select>
           </div>
         </div>
@@ -118,6 +119,7 @@ export function SweetList() {
 }
 
 export function SweetDetails() {
+  const { t } = useLanguage();
   const { id } = useParams();
   const { products } = useProducts();
   const product = products.find((item) => item.id === id);
@@ -130,7 +132,7 @@ export function SweetDetails() {
         <Navbar />
         <main className="page">
           <div className="notice">
-            Product not found. <Link to="/sweetlist">Back to sweet list</Link>
+            Product not found. <Link to="/sweetlist">{t("backToList")}</Link>
           </div>
         </main>
       </>
@@ -142,19 +144,19 @@ export function SweetDetails() {
     <>
       <Navbar />
       <main className="page detail-page">
-        <BackLink to="/sweetlist">Back to Sweet List</BackLink>
+        <BackLink to="/sweetlist">{t("backToList")}</BackLink>
         <div className="detail-layout">
           <section>
             <p className="product-id">{product.id}</p>
             <h1>{product.name}</h1>
             <p className="detail-price">
               {price === null
-                ? "Price not added"
+                ? t("priceNotAdded")
                 : `${formatCurrency(price)} / kg`}
             </p>
             <p className="muted">
               {price === null
-                ? "This product will be available once a price is added."
+                ? t("pricePending")
                 : `${formatCurrency(price / 1000)} per gram`}
             </p>
             <button
@@ -162,24 +164,24 @@ export function SweetDetails() {
               disabled={price === null}
               onClick={() => addItem(product, 10, 10, "g")}
             >
-              Add 10.00g to cart
+              {t("addToCart")}
             </button>
             <div className="detail-info">
-              <h3>Ingredients</h3>
+              <h3>{t("ingredients")}</h3>
               <p className="muted">
                 {product.ingredients.length
                   ? product.ingredients.join(", ")
-                  : "No ingredients listed."}
+                  : t("noIngredients")}
               </p>
             </div>
           </section>
           {price !== null && (
             <section className="conversion-panel">
-              <p className="eyebrow">Quick conversion</p>
-              <h2>Price it your way</h2>
+              <p className="eyebrow">{t("quickConversion")}</p>
+              <h2>{t("priceYourWay")}</h2>
               <div className="conversion-card">
                 <label>
-                  Weight to price<span>How much will it cost?</span>
+                  {t("weightToPrice")}<span>{t("costQuestion")}</span>
                 </label>
                 <div className="input-with-suffix">
                   <input
@@ -203,7 +205,7 @@ export function SweetDetails() {
               </div>
               <div className="conversion-card">
                 <label>
-                  Money to weight<span>How much can they get?</span>
+                  {t("moneyToWeight")}<span>{t("weightQuestion")}</span>
                 </label>
                 <div className="input-with-suffix">
                   <b>₹</b>
@@ -232,6 +234,7 @@ export function SweetDetails() {
 }
 
 export function Cart() {
+  const { t } = useLanguage();
   const { items, clearCart } = useCart();
   const navigate = useNavigate();
   const total = items.reduce(
@@ -246,12 +249,12 @@ export function Cart() {
       <main className="page">
         <div className="page-heading">
           <div>
-            <p className="eyebrow">Ready when you are</p>
-            <h1>Your Cart</h1>
+            <p className="eyebrow">{t("ready")}</p>
+            <h1>{t("yourCart")}</h1>
             <p className="muted">
               {items.length
-                ? "Review weights and prepare the bill."
-                : "Your cart is waiting for its first sweet."}
+                ? t("reviewCart")
+                : t("emptyCart")}
             </p>
           </div>
         </div>
@@ -265,13 +268,13 @@ export function Cart() {
             <section className="summary">
               <div>
                 <span>
-                  Total products<strong>{items.length}</strong>
+                  {t("totalProducts")}<strong>{items.length}</strong>
                 </span>
                 <span>
-                  Total weight<strong>{formatNumber(weight)}g</strong>
+                  {t("totalWeight")}<strong>{formatNumber(weight)}g</strong>
                 </span>
                 <span>
-                  Grand total
+                  {t("grandTotal")}
                   <strong className="grand-total">
                     {formatCurrency(total)}
                   </strong>
@@ -279,13 +282,13 @@ export function Cart() {
               </div>
               <div className="summary-actions">
                 <button className="button ghost" onClick={clearCart}>
-                  Clear cart
+                  {t("clearCart")}
                 </button>
                 <button
                   className="button primary"
                   onClick={() => navigate("/billing")}
                 >
-                  Proceed to billing <ArrowRight size={17} />
+                  {t("proceed")} <ArrowRight size={17} />
                 </button>
               </div>
             </section>
@@ -293,12 +296,12 @@ export function Cart() {
         ) : (
           <div className="empty-state">
             <div className="empty-icon">✦</div>
-            <h2>No sweets added yet</h2>
+            <h2>{t("noSweets")}</h2>
             <p className="muted">
-              Pick something delicious from the sweet list.
+              {t("pickSweet")}
             </p>
             <Link className="button primary" to="/sweetlist">
-              Browse sweet list
+              {t("browse")}
             </Link>
           </div>
         )}
