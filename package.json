@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "cp index.template.html index.html && tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "preview": "vite preview",
     "pro": "serve -s dist"
   },
